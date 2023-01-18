@@ -12,7 +12,8 @@ const routes = Object.keys(pages).map((path) => {
     return {
         name,
         path: name === 'Home' ? '/' : `/${name.toLowerCase()}`,
-        component: pages[path]!.default,
+        // @ts-ignore
+        component: pages[path].default,
     }
 })
 
