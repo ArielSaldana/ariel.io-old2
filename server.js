@@ -47,7 +47,7 @@ async function createServer() {
 //                    )
 
             let template = indexProd
-
+            let rend
             if (!isProd) {
                 // 2. Apply Vite HTML transforms. This injects the Vite HMR client, and
                 //    also applies HTML transforms from Vite plugins, e.g. global preambles
@@ -58,15 +58,17 @@ async function createServer() {
                 //    your ESM source code to be usable in Node.js! There is no bundling
                 //    required, and provides efficient invalidation similar to HMR.
                 const { render } = await vite.ssrLoadModule('/src/entry-server.tsx')
+                rend = render
             } else {
                 const { render } = await vite.ssrLoadModule('.dist/server/entry-server.tsx')
+                rend = render
             }
 
             // 4. render the app HTML. This assumes entry-server.js's exported `render`
             //    function calls appropriate framework SSR APIs,
             //    e.g. ReactDOMServer.renderToString()
             const context = {}
-            const appHtml = await render(url, context)
+            const appHtml = await rend(url, context)
 
             if (context.url) {
                 // Somewhere a `<Redirect>` was rendered
