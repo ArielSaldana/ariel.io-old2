@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import { Mouse, Ticker, Viewport } from '@unreal/pan';
 import * as pan from "@unreal/pan";
+import bean from '../../assets/svgs/bean-fat.svg'
 
 interface MousePosition {
     x: number
@@ -44,7 +45,7 @@ export default function Cursor() {
         const ticker = pan.ticker()
         const viewport = pan.viewport({fireViewportInformationOnListen: true})
 
-        viewport.on('resize', (resizeEvent: any) => {
+        viewport!.on('resize', (resizeEvent: any) => {
             viewportInformation.width = resizeEvent.width;
             viewportInformation.height = resizeEvent.height;
             setViewportWidthHeight({
@@ -53,7 +54,7 @@ export default function Cursor() {
             })
         })
 
-        mouse.on('move', (mouseEvent: any) => {
+        mouse!.on('move', (mouseEvent: any) => {
             if (!mouseVisible) {
                 setMouseVisible(true)
             }
@@ -73,7 +74,7 @@ export default function Cursor() {
             }
         })
 
-        ticker.on('tick', () => {
+        ticker!.on('tick', () => {
             if (cursorElemRef.current !== null) {
                 const elem = cursorElemRef.current as HTMLElement
                 const width = elem.offsetWidth
@@ -93,7 +94,6 @@ export default function Cursor() {
                 //animated mouse size
                 animatedCursorSize += (cursorSize - animatedCursorSize) * 0.3
                 setCursorSize(animatedCursorSize)
-
             }
         })
 
@@ -103,12 +103,14 @@ export default function Cursor() {
     const display = mouseVisible ? 'flex' : 'none'
     return (
         <>
-        <div ref={cursorElemRef} className="cursor" style={{
+        <div ref={cursorElemRef} className="cursor azuki" style={{
                 width: `${cursorSize}px`,
                 height: `${cursorSize}px`,
                 display: `${display}`,
                 transform: `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, ${mousePosition.x}, ${mousePosition.y}, 0, 1)`
-            }}></div>
+            }}>
+            <img src={bean} className="logo react" alt="React logo" />
+        </div>
         </>
     )
 }
