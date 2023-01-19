@@ -1,5 +1,6 @@
-import {Mouse, Ticker, Viewport} from "@unreal/pan"
 import {useEffect, useRef, useState} from "react";
+import { Mouse, Ticker, Viewport } from '@unreal/pan';
+import * as pan from "@unreal/pan";
 
 interface MousePosition {
     x: number
@@ -15,7 +16,7 @@ export default function Cursor() {
     const [mousePosition, setMousePosition] = useState<MousePosition>({x: 0, y: 0})
     const [mouseVisible, setMouseVisible] = useState(false)
     const [cursorSize, setCursorSize] = useState(32)
-    const [viewportWidthHeight, setViewportWidthHeight] = useState({width: 6, height: 6})
+    const [viewportWidthHeight, setViewportWidthHeight] = useState({width: 0, height: 0})
 
     useEffect(() => {
         console.log(viewportWidthHeight)
@@ -38,9 +39,10 @@ export default function Cursor() {
         let cursorSize = 32;
         let animatedCursorSize = 32;
 
+//        const mouse = pan.mouse()
         const mouse = Mouse.getInstance()
-        const ticker = Ticker.getInstance()
-        const viewport = Viewport.getInstance({fireViewportInformationOnListen: true})
+        const ticker = pan.ticker()
+        const viewport = pan.viewport({fireViewportInformationOnListen: true})
 
         viewport.on('resize', (resizeEvent: any) => {
             viewportInformation.width = resizeEvent.width;
