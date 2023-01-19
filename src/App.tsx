@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 
 import { Link, Route, Routes } from 'react-router-dom'
 import './App.css'
+import Cursor from "./components/mouse/Cursor";
 
 const pages = import.meta.glob('./pages/*.tsx', { eager: true })
 
@@ -20,6 +21,7 @@ const routes = Object.keys(pages).map((path) => {
 function App() {
   return (
     <>
+    <Cursor></Cursor>
       <nav>
         <ul>
           {routes.map(({ name, path }) => {
