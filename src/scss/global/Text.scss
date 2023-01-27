@@ -1,0 +1,30 @@
+@import '../constants/Text';
+@import '../constants/Fonts';
+@import '../mixins/MediaQueries';
+@import '../mixins/ThemeMixins';
+@import '../global/Font';
+
+h1, h2, h3, h4, h5, h6, p, {
+    font-family: $primary-font;
+    @include dark-theme {
+        color: white;
+    }
+    @include light-theme {
+        color: black
+    }
+}
+
+h1 {
+    font-size: $headerTextDefault;
+    @include for-tablet-portrait-up {
+        font-size: $headerTextLarge;
+    }
+}
+
+h2 {
+    font-size: 38px;
+}
+
+p {
+    line-height: 1.8;
+}

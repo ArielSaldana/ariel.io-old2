@@ -1,0 +1,9 @@
+@import 'utilities/Normalize';
+@import 'global/Text';
+@import 'global/UI';
+@import 'global/Links';
+@import 'constants/Fonts';
+
+html, body {
+    font-family: $primary-font
+}

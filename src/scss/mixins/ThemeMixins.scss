@@ -1,0 +1,16 @@
+@mixin dark-theme {
+    html.pan-dark-mode & { @content; }
+}
+
+@mixin light-theme {
+    html.pan-light-mode & { @content; }
+}
+
+@mixin dark-theme-root {
+    html.pan-dark-mode { @content; }
+}
+
+@mixin light-theme-root {
+    html.pan-light-mode { @content; }
+}
+

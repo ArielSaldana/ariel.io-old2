@@ -1,0 +1,24 @@
+@use "sass:map";
+
+$secondaryTextColor: #000;
+
+$offwhite-a: #f1f1f1;
+$offblack-a: #121417;
+$blue: #004aff;
+
+$light-theme-colors: (
+        textColor: $offblack-a,
+        backgroundColor: $offwhite-a
+);
+
+$dark-theme-colors: (
+        textColor: $offwhite-a,
+        backgroundColor: $offblack-a
+);
+
+.alert {
+  // Instead of $theme-color-#{warning}
+  background-color: map.get($dark-theme-colors, "backgroundColor");
+}
+
+

@@ -1,0 +1,37 @@
+@use "sass:map";
+@import '../mixins/ThemeMixins';
+@import '../constants/Colors';
+
+a {
+    text-decoration: none;
+
+    @include light-theme {
+        color: map.get($light-theme-colors, "textColor");
+    }
+
+    @include dark-theme {
+        color: map.get($dark-theme-colors, "textColor");
+    }
+}
+
+a:hover {
+    text-decoration:none;
+    cursor:pointer;
+
+    @include light-theme {
+        color: $blue;
+    }
+
+    @include dark-theme {
+        color: $blue;
+    }
+}
+
+//$themes: ((light -45px), (dark 45px));
+//@each $theme in  $themes{
+//    $name: nth($theme, 1);
+//    $offset: nth($theme, 2);
+//    .fa-caret-#{$name}{
+//        top: $offset;
+//    }
+//}

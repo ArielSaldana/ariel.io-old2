@@ -1,43 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import {useEffect, useState} from 'react'
 
-import { Link, Route, Routes } from 'react-router-dom'
-import './App.css'
-import Cursor from "./components/mouse/Cursor";
+import './App.scss'
+import { Cursor } from "@unreal/unreal-components"
+import {Detector} from "@unreal/pan";
+import Navigation from "./components/navigation/Navigation";
+import '@unreal/unreal-components/dist/style.css'
+import {Link, Route, Routes} from "react-router-dom";
 
 const pages = import.meta.glob('./pages/*.tsx', { eager: true })
-
 const routes = Object.keys(pages).map((path) => {
     const name = path.match(/\.\/pages\/(.*)\.tsx$/)![1]
-    console.log(name)
     return {
         name,
         path: name === 'Home' ? '/' : `/${name.toLowerCase()}`,
-        // @ts-ignore
+        // $ts-ignore
         component: pages[path].default,
     }
 })
 
 function App() {
+    const [customCursorEnabled, setCustomCursorEnabled] = useState(false)
+    useEffect(() => {
+        const detector = Detector.getInstance()
+        if (detector?.isTouchScreen() === false && !detector.isMobile()) {
+            setCustomCursorEnabled(true)
+        }
+    })
   return (
     <>
-    <Cursor></Cursor>
-      <nav>
-        <ul>
-          {routes.map(({ name, path }) => {
-            return (
-              <li key={path}>
-                <Link to={path}>{name}</Link>
-              </li>
-            )
-          })}
-        </ul>
-      </nav>
-      <Routes>
-        {routes.map(({ path, component: RouteComp }) => {
-          return <Route key={path} path={path} element={<RouteComp />}></Route>
-        })}
-      </Routes>
+        {customCursorEnabled &&
+            <Cursor hexColor='#F00' />
+        }
+    <Navigation routes={routes}/>
+        <div className="body-content">
+            <Routes>
+                {routes.map(({ path, component: RouteComp }) => {
+                    return <Route key={path} path={path} element={<RouteComp />}></Route>
+                })}
+            </Routes>
+        </div>
     </>
   )
 }

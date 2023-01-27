@@ -1,0 +1,94 @@
+.navigation {
+    pointer-events: none;
+    position:absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    overflow: hidden;
+    height: 100vh;
+    background: black;
+    opacity: 0;
+    transition: opacity .2s ease-in;
+}
+
+body:global(.navigation-opened) :local(.navigation) {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.menu-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 50;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    padding: 8px;
+}
+
+.menu-button::after {
+    content: "";
+    display: block;
+    background: white;
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+}
+
+body:global(.navigation-opened) :local(.menu-button::after) {
+    opacity: 1;
+}
+
+
+.navigation nav {
+    display: block;
+    position: relative;
+}
+
+.navigation nav button {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    z-index: 999;
+}
+
+.navigation nav ul {
+    padding: 0;
+    list-style: none;
+    margin-top: 80px;
+    margin-bottom: 0px;
+}
+
+.navigation nav ul li {
+    margin-right: 20px;
+    line-height: 2;
+    font-size: 32px;
+    overflow: hidden;
+}
+
+.navigation nav ul li a {
+    display: block;
+    transition: transform .3s cubic-bezier(.45, 0, .75, 1);
+    transform: translate3d(0px, 100%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+}
+
+body:global(.navigation-opened) :local(.navigation nav ul li a) {
+    opacity: 1;
+    transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+}
+
+.navigation-primary {
+    text-align: left;
+    padding: 0 20px;
+}

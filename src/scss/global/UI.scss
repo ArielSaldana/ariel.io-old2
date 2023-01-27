@@ -1,0 +1,10 @@
+@import '../mixins/ThemeMixins';
+
+button {
+    @include dark-theme {
+        color: white;
+    }
+    @include light-theme {
+        color: black
+    }
+}

@@ -12,5 +12,10 @@ export default defineConfig({
     define: {
         global: 'window',
     },
+    css: {
+        modules: {
+            localsConvention: 'camelCaseOnly'
+        }
+    },
     plugins: [react(), markdown()],
 })
