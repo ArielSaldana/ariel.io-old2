@@ -10,7 +10,6 @@ async function createServer() {
     const app = express()
     const isProd = process.env.NODE_ENV === 'production'
 
-    const indexFile = isProd ? 'dist/client/index.html' : 'index.html'
     const indexProd = isProd
     ? fs.readFileSync(resolve('dist/client/index.html'), 'utf-8')
     : fs.readFileSync(path.resolve(__dirname, 'index.html'),'utf-8')
