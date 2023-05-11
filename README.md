@@ -1,9 +1,2 @@
 # Ariel.io Personal site
-
-## Tech Stack
-
-* React
-* Node JS
-* Vite
-
-## Rendering MARKDOWN files using react-markdown
+This project is being rebuilt, eventually I will delete this repo
